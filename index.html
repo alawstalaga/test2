@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>E-Boto | NFSHS</title>
+<title>E-Boto | NFSHS SSLG Election</title>
 <link rel="icon" href="https://i.imgur.com/4Qb8s7v.png">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
@@ -19,7 +19,7 @@ body{
 #splash.hide{display:none;}
 #splash img{width:110px;height:110px;border-radius:50%;margin-bottom:15px;animation:fadeIn 1.5s ease;}
 #splash h1{font-size:28px;letter-spacing:1px;margin-bottom:8px;animation:fadeIn 1.5s ease;}
-#splash p{font-size:15px;opacity:0.85;}
+#splash p{font-size:15px;opacity:0.85;text-align:center;line-height:1.4;}
 @keyframes fadeOut{to{opacity:0;visibility:hidden;}}
 @keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
 .container{background:rgba(255,255,255,0.96);border-radius:10px;padding:30px 35px;width:95%;max-width:420px;box-shadow:0 4px 25px rgba(0,0,0,0.2);text-align:center;}
@@ -55,7 +55,7 @@ th{background-color:#0054a6;color:white;}
 <div id="splash">
   <img src="https://i.imgur.com/Ec5IF7i.jpeg" alt="NFSHS Logo">
   <h1>E-Boto</h1>
-  <p>North Fairview Senior High School</p>
+  <p>North Fairview Senior High School<br>SSLG Presidential Election</p>
 </div>
 
 <!-- LOGIN -->
@@ -77,24 +77,24 @@ th{background-color:#0054a6;color:white;}
 <!-- VOTING -->
 <div class="container hidden" id="voteContainer">
   <img src="https://i.imgur.com/4Qb8s7v.png" class="logo" alt="NFSHS Logo">
-  <h2>Cast Your Vote</h2>
+  <h2>Vote for SSLG President</h2>
   <p>Welcome, <span id="studentName"></span></p>
 
   <!-- Candidates -->
-  <div class="candidate"><img src="https://i.imgur.com/d7AuAlo.png"><div><b>Taylor Swift</b><br>Grade 12 – STEM<br><button class="vote-btn" onclick="vote('Taylor Swift')">Vote</button></div></div>
-  <div class="candidate"><img src="https://i.imgur.com/DVoBILD.jpeg"><div><b>Kanye West</b><br>Grade 12 – HUMSS<br><button class="vote-btn" onclick="vote('Kanye West')">Vote</button></div></div>
-  <div class="candidate"><img src="https://i.imgur.com/RkSJCLB.jpeg"><div><b>Travis Scott</b><br>Grade 11 – TVL<br><button class="vote-btn" onclick="vote('Travis Scott')">Vote</button></div></div>
-  <div class="candidate"><img src="https://i.imgur.com/7QNUOtz.jpeg"><div><b>Travis Bickle</b><br>Grade 11 – ABM<br><button class="vote-btn" onclick="vote('Travis Bickle')">Vote</button></div></div>
-  <div class="candidate"><img src="https://i.imgur.com/ibQXZ1p.jpeg"><div><b>Tony Montana</b><br>Grade 12 – GAS<br><button class="vote-btn" onclick="vote('Tony Montana')">Vote</button></div></div>
-  <div class="candidate"><img src="https://i.imgur.com/oPNK1o3.jpeg"><div><b>Lana Del Ray</b><br>Grade 11 – ICT<br><button class="vote-btn" onclick="vote('Lana Del Ray')">Vote</button></div></div>
+  <div class="candidate"><img src="https://i.imgur.com/d7AuAlo.png"><div><b>Taylor Swift</b><br>Running for: <b>SSLG President</b><br>Grade 12 – STEM<br><button class="vote-btn" onclick="vote('Taylor Swift')">Vote</button></div></div>
+  <div class="candidate"><img src="https://i.imgur.com/DVoBILD.jpeg"><div><b>Kanye West</b><br>Running for: <b>SSLG President</b><br>Grade 12 – HUMSS<br><button class="vote-btn" onclick="vote('Kanye West')">Vote</button></div></div>
+  <div class="candidate"><img src="https://i.imgur.com/RkSJCLB.jpeg"><div><b>Travis Scott</b><br>Running for: <b>SSLG President</b><br>Grade 11 – TVL<br><button class="vote-btn" onclick="vote('Travis Scott')">Vote</button></div></div>
+  <div class="candidate"><img src="https://i.imgur.com/7QNUOtz.jpeg"><div><b>Travis Bickle</b><br>Running for: <b>SSLG President</b><br>Grade 11 – ABM<br><button class="vote-btn" onclick="vote('Travis Bickle')">Vote</button></div></div>
+  <div class="candidate"><img src="https://i.imgur.com/ibQXZ1p.jpeg"><div><b>Tony Montana</b><br>Running for: <b>SSLG President</b><br>Grade 12 – GAS<br><button class="vote-btn" onclick="vote('Tony Montana')">Vote</button></div></div>
+  <div class="candidate"><img src="https://i.imgur.com/oPNK1o3.jpeg"><div><b>Lana Del Ray</b><br>Running for: <b>SSLG President</b><br>Grade 11 – ICT<br><button class="vote-btn" onclick="vote('Lana Del Ray')">Vote</button></div></div>
 
   <button style="background:#777;" onclick="showLogin()">Logout</button>
 </div>
 
 <!-- ADMIN -->
 <div class="container hidden" id="adminContainer">
-  <img src="https://i.imgur.com/4Qb8s7v.png" class="logo" alt="NFSHS Logo">
-  <h2>Admin Dashboard</h2>
+  <img src="https://i.imgur.com/Ec5IF7i.jpeg" class="logo" alt="NFSHS Logo">
+  <h2>SSLG Presidential Election Admin Dashboard</h2>
   <div id="adminStats" style="text-align:left; margin-top:10px; font-size:15px; background:#f8f9fa; padding:10px; border-radius:6px;">
     <p><b>Total Registered Voters:</b> <span id="totalVoters">0</span></p>
     <p><b>Total Votes Cast:</b> <span id="totalVotes">0</span></p>
@@ -124,7 +124,17 @@ let users=JSON.parse(localStorage.getItem('users'))||[
   {lrn:'202500000007',pass:'student7',name:'Paolo Jimenez',voted:false},
   {lrn:'202500000008',pass:'student8',name:'Sarah Gonzales',voted:false},
   {lrn:'202500000009',pass:'student9',name:'Lorenzo Uy',voted:false},
-  {lrn:'202500000010',pass:'student10',name:'Angela Bautista',voted:false}
+  {lrn:'202500000010',pass:'student10',name:'Angela Bautista',voted:false},
+  {lrn:'202500000011',pass:'student11',name:'John Villanueva',voted:false},
+  {lrn:'202500000012',pass:'student12',name:'Elaine Tan',voted:false},
+  {lrn:'202500000013',pass:'student13',name:'Mark Garcia',voted:false},
+  {lrn:'202500000014',pass:'student14',name:'Rhea Torres',voted:false},
+  {lrn:'202500000015',pass:'student15',name:'Brian Cruz',voted:false},
+  {lrn:'202500000016',pass:'student16',name:'Nicole Ramos',voted:false},
+  {lrn:'202500000017',pass:'student17',name:'Kevin Flores',voted:false},
+  {lrn:'202500000018',pass:'student18',name:'Alexa Navarro',voted:false},
+  {lrn:'202500000019',pass:'student19',name:'Jasper Mendoza',voted:false},
+  {lrn:'202500000020',pass:'student20',name:'Camille Fernandez',voted:false}
 ];
 let votes=JSON.parse(localStorage.getItem('votes'))||[];
 let auditLog=JSON.parse(localStorage.getItem('auditLog'))||[];
@@ -166,7 +176,7 @@ function vote(name){
   localStorage.setItem('users',JSON.stringify(users));
   localStorage.setItem('votes',JSON.stringify(votes));
   logActivity('Voted',name);
-  alert(`You voted for ${name}!`);
+  alert(`You voted for ${name} as SSLG President!`);
   showLogin();
   if(chartInstance) renderChart();
 }
@@ -189,8 +199,8 @@ function renderChart(){
   if(chartInstance){chartInstance.destroy();}
   if(Object.keys(counts).length===0){ctx.font="16px Arial";ctx.fillText("No votes yet.",40,50);return;}
   const colors=['#0054a6','#00b4d8','#48cae4','#90e0ef','#ade8f4','#caf0f8'];
-  const data={labels:Object.keys(counts),datasets:[{label:'Vote Count',data:Object.values(counts),backgroundColor:colors}]};
-  chartInstance=new Chart(ctx,{type:'bar',data,options:{responsive:true,plugins:{legend:{display:false},title:{display:true,text:'Vote Distribution by Candidate'}},scales:{y:{beginAtZero:true,ticks:{precision:0}}}}});
+  const data={labels:Object.keys(counts),datasets:[{label:'Vote Count (SSLG President)',data:Object.values(counts),backgroundColor:colors}]};
+  chartInstance=new Chart(ctx,{type:'bar',data,options:{responsive:true,plugins:{legend:{display:false},title:{display:true,text:'SSLG Presidential Election Results'}},scales:{y:{beginAtZero:true,ticks:{precision:0}}}}});
 }
 
 function renderAuditLog(){
@@ -202,17 +212,17 @@ function exportResults(){
   let csv="Candidate,Votes\n";const counts={};votes.forEach(v=>counts[v]=(counts[v]||0)+1);
   for(let c in counts) csv+=`${c},${counts[c]}\n`;
   const blob=new Blob([csv],{type:'text/csv'});const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');a.href=url;a.download="results.csv";a.click();URL.revokeObjectURL(url);
+  const a=document.createElement('a');a.href=url;a.download="sslg_results.csv";a.click();URL.revokeObjectURL(url);
 }
 
 function exportAuditLog(){
   let csv="Time,LRN,Action,Candidate\n";
   auditLog.forEach(e=>{csv+=`${e.time},${e.lrn},${e.action},${e.candidate}\n`;});
   const blob=new Blob([csv],{type:'text/csv'});const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');a.href=url;a.download="audit_log.csv";a.click();URL.revokeObjectURL(url);
+  const a=document.createElement('a');a.href=url;a.download="sslg_audit_log.csv";a.click();URL.revokeObjectURL(url);
 }
 
-/* 🔹 Forgot Password: Current Password → New Password */
+/* 🔹 Forgot Password */
 function forgotPassword() {
   const lrn = prompt("Enter your 12-digit LRN:");
   if (!lrn) return;
@@ -221,16 +231,12 @@ function forgotPassword() {
   const user = users.find(u => u.lrn === lrn);
   if (!user) return alert("No account found with that LRN.");
 
-  const currentPass = prompt("Enter your current password:");
-  if (!currentPass) return alert("Password reset cancelled.");
-  if (currentPass !== user.pass) return alert("Current password incorrect.");
-
   const newPass = prompt("Enter your new password:");
   if (!newPass) return alert("Password reset cancelled.");
 
   user.pass = newPass;
   localStorage.setItem('users', JSON.stringify(users));
-  alert("Password successfully updated! You can now log in with your new password.");
+  alert("Password successfully updated!");
 }
 </script>
 </body>
