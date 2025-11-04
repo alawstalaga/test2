@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Boto | NFSHS</title>
+<link rel="icon" href="https://i.imgur.com/4Qb8s7v.png">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+*{box-sizing:border-box;font-family:'Segoe UI',Arial,sans-serif;margin:0;padding:0;}
+body{
+  background:url('A_digital_screenshot_of_an_online_voting_system_we.png') no-repeat center center fixed;
+  background-size:cover;
+  display:flex;justify-content:center;align-items:center;
+  height:100vh;
+}
+.hidden{display:none;}
+#splash{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(180deg,#0054a6 0%,#0072bb 100%);color:white;display:flex;flex-direction:column;justify-content:center;align-items:center;z-index:1000;animation:fadeOut 0.8s ease forwards;animation-delay:2.3s;}
+#splash.hide{display:none;}
+#splash img{width:110px;height:110px;border-radius:50%;margin-bottom:15px;animation:fadeIn 1.5s ease;}
+#splash h1{font-size:28px;letter-spacing:1px;margin-bottom:8px;animation:fadeIn 1.5s ease;}
+#splash p{font-size:15px;opacity:0.85;}
+@keyframes fadeOut{to{opacity:0;visibility:hidden;}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+.container{background:rgba(255,255,255,0.96);border-radius:10px;padding:30px 35px;width:95%;max-width:420px;box-shadow:0 4px 25px rgba(0,0,0,0.2);text-align:center;}
+.logo{width:100px;height:100px;margin-bottom:15px;border-radius:50%;}
+h2{color:#0054a6;margin-bottom:10px;}
+input,select{width:100%;padding:10px;margin:8px 0;border:1px solid #ccc;border-radius:6px;font-size:15px;}
+button{width:100%;padding:10px;background-color:#0054a6;color:white;border:none;border-radius:6px;font-size:15px;cursor:pointer;margin-top:5px;}
+button:hover{background-color:#003e7c;}
+.eye{position:absolute;right:12px;top:50%;transform:translateY(-50%);cursor:pointer;color:#555;}
+.eye svg{width:20px;height:20px;fill:#555;}
+.eye svg:hover{fill:#000;}
+#adminContainer{max-width:700px;}
+table{width:100%;border-collapse:collapse;margin-top:12px;}
+th,td{border:1px solid #ccc;padding:6px;text-align:left;font-size:13px;}
+th{background-color:#0054a6;color:white;}
+.candidate{display:flex;align-items:center;background:#f8f9fa;border-radius:6px;padding:10px;margin:6px 0;}
+.candidate img{width:60px;height:60px;border-radius:50%;object-fit:cover;border:2px solid #0054a6;margin-right:10px;}
+.vote-btn{background:#0054a6;color:white;border:none;padding:6px 10px;border-radius:4px;cursor:pointer;}
+.vote-btn:hover{background:#003e7c;}
+.forgot-link{
+  display:block;
+  margin-top:10px;
+  font-size:14px;
+  color:#0054a6;
+  text-decoration:none;
+}
+.forgot-link:hover{text-decoration:underline;}
+</style>
+</head>
+
+<body>
+<!-- Splash Screen -->
+<div id="splash">
+  <img src="https://i.imgur.com/Ec5IF7i.jpeg" alt="NFSHS Logo">
+  <h1>E-Boto</h1>
+  <p>North Fairview Senior High School</p>
+</div>
+
+<!-- LOGIN -->
+<div class="container hidden" id="loginContainer">
+  <img src="https://i.imgur.com/Ec5IF7i.jpeg" class="logo" alt="NFSHS Logo">
+  <h2>E-Boto Voting System</h2>
+  <input type="text" id="loginLRN" placeholder="Enter 12-digit LRN" maxlength="12">
+  <div style="position:relative;">
+    <input type="password" id="loginPass" placeholder="Enter Password">
+    <span class="eye" onclick="toggleEye(this,'loginPass')">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 5C6 5 1.73 9.11.1 12c1.63 2.89 5.9 7 11.9 7s10.27-4.11 11.9-7C22.27 9.11 18 5 12 5zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/></svg>
+    </span>
+  </div>
+  <button onclick="login()">Login</button>
+  <button style="background:#00b4d8;" onclick="showAdminLogin()">Admin Access</button>
+  <a href="#" class="forgot-link" onclick="forgotPassword()">Forgot Password?</a>
+</div>
+
+<!-- VOTING -->
+<div class="container hidden" id="voteContainer">
+  <img src="https://i.imgur.com/4Qb8s7v.png" class="logo" alt="NFSHS Logo">
+  <h2>Cast Your Vote</h2>
+  <p>Welcome, <span id="studentName"></span></p>
+
+  <!-- Candidates -->
+  <div class="candidate"><img src="https://i.imgur.com/d7AuAlo.png"><div><b>Taylor Swift</b><br>Grade 12 – STEM<br><button class="vote-btn" onclick="vote('Taylor Swift')">Vote</button></div></div>
+  <div class="candidate"><img src="https://i.imgur.com/DVoBILD.jpeg"><div><b>Kanye West</b><br>Grade 12 – HUMSS<br><button class="vote-btn" onclick="vote('Kanye West')">Vote</button></div></div>
+  <div class="candidate"><img src="https://i.imgur.com/RkSJCLB.jpeg"><div><b>Travis Scott</b><br>Grade 11 – TVL<br><button class="vote-btn" onclick="vote('Travis Scott')">Vote</button></div></div>
+  <div class="candidate"><img src="https://i.imgur.com/7QNUOtz.jpeg"><div><b>Travis Bickle</b><br>Grade 11 – ABM<br><button class="vote-btn" onclick="vote('Travis Bickle')">Vote</button></div></div>
+  <div class="candidate"><img src="https://i.imgur.com/ibQXZ1p.jpeg"><div><b>Tony Montana</b><br>Grade 12 – GAS<br><button class="vote-btn" onclick="vote('Tony Montana')">Vote</button></div></div>
+  <div class="candidate"><img src="https://i.imgur.com/oPNK1o3.jpeg"><div><b>Lana Del Ray</b><br>Grade 11 – ICT<br><button class="vote-btn" onclick="vote('Lana Del Ray')">Vote</button></div></div>
+
+  <button style="background:#777;" onclick="showLogin()">Logout</button>
+</div>
+
+<!-- ADMIN -->
+<div class="container hidden" id="adminContainer">
+  <img src="https://i.imgur.com/4Qb8s7v.png" class="logo" alt="NFSHS Logo">
+  <h2>Admin Dashboard</h2>
+  <div id="adminStats" style="text-align:left; margin-top:10px; font-size:15px; background:#f8f9fa; padding:10px; border-radius:6px;">
+    <p><b>Total Registered Voters:</b> <span id="totalVoters">0</span></p>
+    <p><b>Total Votes Cast:</b> <span id="totalVotes">0</span></p>
+    <p><b>Remaining Voters:</b> <span id="remainingVoters">0</span></p>
+  </div>
+  <canvas id="resultChart"></canvas>
+  <button style="background:#00b4d8;margin-top:15px;" onclick="exportResults()">Export Results</button>
+
+  <h3 style="margin-top:20px;color:#0054a6;">Audit Log</h3>
+  <table id="auditTable">
+    <thead><tr><th>Time</th><th>LRN</th><th>Action</th><th>Candidate</th></tr></thead>
+    <tbody></tbody>
+  </table>
+  <button style="background:#0072bb;margin-top:10px;" onclick="exportAuditLog()">Export Audit Log</button>
+  <button style="background:#777;margin-top:8px;" onclick="logout()">Logout</button>
+</div>
+
+<script>
+window.addEventListener('load',()=>{setTimeout(()=>{document.getElementById('splash').classList.add('hide');document.getElementById('loginContainer').classList.remove('hidden');},2500);});
+let users=JSON.parse(localStorage.getItem('users'))||[
+  {lrn:'202500000001',pass:'student1',name:'Juan Dela Cruz',voted:false},
+  {lrn:'202500000002',pass:'student2',name:'Maria Santos',voted:false},
+  {lrn:'202500000003',pass:'student3',name:'Pedro Reyes',voted:false},
+  {lrn:'202500000004',pass:'student4',name:'Anna Lim',voted:false},
+  {lrn:'202500000005',pass:'student5',name:'Carlos Dela Peña',voted:false},
+  {lrn:'202500000006',pass:'student6',name:'Joanne Rivera',voted:false},
+  {lrn:'202500000007',pass:'student7',name:'Paolo Jimenez',voted:false},
+  {lrn:'202500000008',pass:'student8',name:'Sarah Gonzales',voted:false},
+  {lrn:'202500000009',pass:'student9',name:'Lorenzo Uy',voted:false},
+  {lrn:'202500000010',pass:'student10',name:'Angela Bautista',voted:false}
+];
+let votes=JSON.parse(localStorage.getItem('votes'))||[];
+let auditLog=JSON.parse(localStorage.getItem('auditLog'))||[];
+const adminPassword="admin123";
+let chartInstance=null;
+
+function toggleEye(icon,inputId){
+  const input=document.getElementById(inputId);
+  input.type=input.type==="password"?"text":"password";
+}
+
+function logActivity(action,candidate='-'){
+  const lrn=document.getElementById('loginLRN').value.trim();
+  const timestamp=new Date().toLocaleString();
+  auditLog.push({time:timestamp,lrn,action,candidate});
+  localStorage.setItem('auditLog',JSON.stringify(auditLog));
+}
+
+function login(){
+  const lrn=document.getElementById('loginLRN').value.trim();
+  const pass=document.getElementById('loginPass').value.trim();
+  if(lrn.length!==12)return alert("LRN must be 12 digits!");
+  const user=users.find(u=>u.lrn===lrn&&u.pass===pass);
+  if(!user)return alert("Invalid LRN or Password.");
+  if(user.voted)return alert("You have already voted.");
+  document.getElementById('studentName').textContent=user.name;
+  document.getElementById('loginContainer').classList.add('hidden');
+  document.getElementById('voteContainer').classList.remove('hidden');
+  logActivity('Logged in');
+}
+
+function vote(name){
+  const lrn=document.getElementById('loginLRN').value.trim();
+  const user=users.find(u=>u.lrn===lrn);
+  if(!user)return alert("User not found.");
+  if(user.voted)return alert("You already voted.");
+  votes.push(name);
+  user.voted=true;
+  localStorage.setItem('users',JSON.stringify(users));
+  localStorage.setItem('votes',JSON.stringify(votes));
+  logActivity('Voted',name);
+  alert(`You voted for ${name}!`);
+  showLogin();
+  if(chartInstance) renderChart();
+}
+
+function showLogin(){document.getElementById('voteContainer').classList.add('hidden');document.getElementById('adminContainer').classList.add('hidden');document.getElementById('loginContainer').classList.remove('hidden');document.getElementById('loginLRN').value="";document.getElementById('loginPass').value="";}
+function logout(){showLogin();}
+function showAdminLogin(){
+  const pass=prompt("Enter Admin Password:");
+  if(pass===adminPassword){document.getElementById('loginContainer').classList.add('hidden');document.getElementById('adminContainer').classList.remove('hidden');renderChart();renderAuditLog();}
+  else if(pass)alert("Incorrect password!");
+}
+
+function renderChart(){
+  const ctx=document.getElementById('resultChart').getContext('2d');
+  const counts={};votes.forEach(v=>counts[v]=(counts[v]||0)+1);
+  const totalVoters=users.length,totalVotes=votes.length,remaining=totalVoters-totalVotes;
+  document.getElementById('totalVoters').textContent=totalVoters;
+  document.getElementById('totalVotes').textContent=totalVotes;
+  document.getElementById('remainingVoters').textContent=remaining;
+  if(chartInstance){chartInstance.destroy();}
+  if(Object.keys(counts).length===0){ctx.font="16px Arial";ctx.fillText("No votes yet.",40,50);return;}
+  const colors=['#0054a6','#00b4d8','#48cae4','#90e0ef','#ade8f4','#caf0f8'];
+  const data={labels:Object.keys(counts),datasets:[{label:'Vote Count',data:Object.values(counts),backgroundColor:colors}]};
+  chartInstance=new Chart(ctx,{type:'bar',data,options:{responsive:true,plugins:{legend:{display:false},title:{display:true,text:'Vote Distribution by Candidate'}},scales:{y:{beginAtZero:true,ticks:{precision:0}}}}});
+}
+
+function renderAuditLog(){
+  const tbody=document.querySelector('#auditTable tbody');tbody.innerHTML='';
+  auditLog.forEach(e=>{const tr=document.createElement('tr');tr.innerHTML=`<td>${e.time}</td><td>${e.lrn}</td><td>${e.action}</td><td>${e.candidate}</td>`;tbody.appendChild(tr);});
+}
+
+function exportResults(){
+  let csv="Candidate,Votes\n";const counts={};votes.forEach(v=>counts[v]=(counts[v]||0)+1);
+  for(let c in counts) csv+=`${c},${counts[c]}\n`;
+  const blob=new Blob([csv],{type:'text/csv'});const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download="results.csv";a.click();URL.revokeObjectURL(url);
+}
+
+function exportAuditLog(){
+  let csv="Time,LRN,Action,Candidate\n";
+  auditLog.forEach(e=>{csv+=`${e.time},${e.lrn},${e.action},${e.candidate}\n`;});
+  const blob=new Blob([csv],{type:'text/csv'});const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download="audit_log.csv";a.click();URL.revokeObjectURL(url);
+}
+
+/* 🔹 Forgot Password: Current Password → New Password */
+function forgotPassword() {
+  const lrn = prompt("Enter your 12-digit LRN:");
+  if (!lrn) return;
+  if (lrn.length !== 12) return alert("LRN must be 12 digits!");
+
+  const user = users.find(u => u.lrn === lrn);
+  if (!user) return alert("No account found with that LRN.");
+
+  const currentPass = prompt("Enter your current password:");
+  if (!currentPass) return alert("Password reset cancelled.");
+  if (currentPass !== user.pass) return alert("Current password incorrect.");
+
+  const newPass = prompt("Enter your new password:");
+  if (!newPass) return alert("Password reset cancelled.");
+
+  user.pass = newPass;
+  localStorage.setItem('users', JSON.stringify(users));
+  alert("Password successfully updated! You can now log in with your new password.");
+}
+</script>
+</body>
+</html>
